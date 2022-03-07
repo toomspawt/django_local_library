@@ -1,0 +1,18 @@
+{% extends 'base_generic.html' %}
+
+{% block title %}Borrowed Book List{% endblock %}
+
+{% block content %}
+  <h1>Borrowed Book List</h1>
+  {% if bookinstance_list %}
+  <ul>
+    {% for bookinstance in bookinstance_list %}
+      <li>
+        <a href="{% url 'renew-book-librarian' pk=bookinstance.id %}">{{ bookinstance.book.title }}</a> ({{bookinstance.book.author}})
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>There are no borrowed books in the library.</p>
+  {% endif %}
+{% endblock %}
