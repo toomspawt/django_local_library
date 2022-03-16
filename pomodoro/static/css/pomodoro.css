@@ -1,0 +1,322 @@
+* {
+    font-family: 'Mochiy Pop P One', sans-serif;
+}
+
+body {
+    margin: 0;
+    transition: color 0.5s ease-in-out 0s;
+    transition: background-color 0.5s ease-in-out 0s;
+}
+
+hr {
+    border: 1px solid rgba(78, 70, 70, 0.1);
+    margin-bottom: 20px;
+    margin-top: 0px;
+}
+
+.color-focus {
+    background-color: rgb(217, 85, 80);
+    color: rgb(217, 85, 80);
+}
+
+.color-short {
+    background-color: rgb(76, 145, 149);
+    color: rgb(76, 145, 149);
+}
+
+.color-long {
+    background-color: rgb(69, 124, 163);
+    color: rgb(69, 124, 163);
+}
+
+.container {
+    min-height: 100vh;
+    width: 100%;
+    max-width: 620px;
+    margin: auto;
+    color: white;
+    box-sizing: border-box;
+}
+
+.setting {
+    height: 60px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.setting-icon {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.setting-button {
+    background: none rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    border: none;
+    margin-left: 10px;
+    color: white;
+    opacity: 0.9;
+    cursor: pointer;
+    padding: 8px 12px;
+    font-size: 13px;
+    min-width: 70px;
+}
+
+.timer {
+    background-color: rgba(255, 255, 255, 0.1);
+    max-width: 480px;
+    margin: auto;
+    margin-bottom: 20px;
+    padding: 20px 0px 30px;
+    margin-bottom: 20px;
+    text-align: center;
+    vertical-align: middle;
+    padding: 20px 0px 30px;
+}
+
+.mode-button-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mode-button {
+    color: white;
+    border: none;
+    border-radius: 4px;
+    margin: 0px;
+    font-size: 16px;
+    font-weight: 300;
+    cursor: pointer;
+    background: none;
+    padding: 2px 12px;
+    height: 28px;
+    text-align: center;
+}
+
+.mode-button:hover,
+.mode-button:focus,
+.mode-button:active {
+    background: none rgba(0, 0, 0, 0.15);
+}
+
+.counter-time {
+    font-size: 100px;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.start-button-group {
+    position: relative;
+}
+
+.counter-start {
+    background-color: rgb(235 235 235);
+    cursor: pointer;
+    border: none;
+    min-width: fit-content;
+    border-radius: 4px;
+    margin-top: 20px;
+    padding: 0;
+    transition: color 0.5s ease-in-out 0s;
+    transition: background-color 0.5s ease-in-out 0s;
+}
+
+.counter-start span {
+    display: block;
+    font-size: 55px;
+    padding: 12px 60px;
+    font-size: 22px;
+    font-weight: bold;
+    border-radius: 4px;
+    background-color: white;
+    transform: translateY(-6px);
+}
+
+#button-skip {
+    position: absolute;
+    right: 10px;
+    display: none;
+}
+
+#button-skip span {
+    padding: 12px 12px;
+}
+
+.counter-start:active span {
+    transform: none;
+}
+
+.task {
+    text-align: center;
+    max-width: 480px;
+    margin: auto;
+}
+
+.period {
+    opacity: 0.6;
+    font-size: 16px;
+    margin: 4px;
+}
+
+.helper-text {
+    color: white;
+    font-size: 18px;
+    font-weight: 1000;
+    margin-bottom: 20px;
+}
+
+.task-setting {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.task-setting-button {
+    background: none rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    border: none;
+    color: white;
+    opacity: 0.9;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+    width: 24px;
+}
+
+.task-setting-button:hover {
+    transform: translateY(2px);
+}
+
+.task-card {
+    box-sizing: border-box;
+    max-width: 100%;
+    background-color: white;
+    margin: 8px 0px;
+    color: rgb(85, 85, 85);
+    border-radius: 4px;
+    text-align: left;
+    padding: 2% 0% 2% 3%;
+    box-shadow: rgb(0 0 0 / 10%) 0px 4px 4px;
+    border-left: 6px white solid;
+    cursor: pointer;
+}
+
+.task-card:hover {
+    border-left: 6px rgb(85, 85, 85, 0.3) solid;
+}
+
+.task-card-selected {
+    transform: translateY(2px);
+    border-left: 6px black solid;
+}
+
+.task-card > * {
+    margin: 3% 0%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.task-card button {
+    margin-right: 20px;
+    background-color: white;
+    color: rgb(96, 85, 21);
+    border: 1px gray solid;
+    border-radius: 4px;
+}
+
+.task-note {
+    background-color: rgb(252, 248, 222);
+    color: rgb(96, 85, 21);
+    border-radius: 4px;
+    width: 86%;
+    margin-left: 4%;
+    font-size: 0.8rem;
+    padding: 3%;
+    font-weight: normal;
+}
+
+.add-task {
+    cursor: pointer;
+    opacity: 0.8;
+    background-color: rgba(0, 0, 0, 0.1);
+    margin: 20px 0px;
+    line-height: 3em;
+    box-sizing: border-box;
+    border-radius: 8px;
+    border: 2px rgba(255, 255, 255, 0.4) dashed;
+    text-align: center;
+}
+
+.add-task:hover {
+    opacity: 1;
+}
+
+.add-task-card,
+.add-task-card:hover {
+    cursor: auto;
+    border-left: none;
+    padding-left: 0;
+    padding-bottom: 0;
+}
+
+#add-task-form {
+    display: none;
+}
+
+.add-task-card > * {
+    width: 94%;
+    border: none;
+    outline: none;
+    padding: 10px 8px;
+    box-sizing: border-box;
+    margin-left: 4%;
+}
+
+.add-task-card input[type="text"] {
+    font-weight: bold;
+    font-size: 22px;
+    color: rgb(85, 85, 85);   
+}
+
+.add-task-card textarea {
+    background-color: rgb(128, 128, 128, 0.1);
+    border-radius: 4px;
+}
+
+.add-task-card input::placeholder,
+.add-task-card textarea::placeholder {
+    color: rgb(85, 85, 85, 0.3);
+}
+
+.add-card-button {
+    justify-content: flex-end;
+    background-color: rgb(128, 128, 128, 0.1);
+    margin: 0px;
+    width: 100%;
+}
+
+.add-card-button button {
+    cursor: pointer;
+    border: none;
+}
+
+.add-card-button #button-cancel {
+    background-color: transparent;
+}
+
+.add-card-button #button-add {
+    box-shadow: rgb(0 0 0 / 20%) 0px 2px 2px;
+    color: white;
+    opacity: 0.9;
+    padding: 8px 25px;
+    background-color: rgb(85, 85, 85);
+}
+
+.add-card-button #button-add:disabled {
+    background-color: rgb(171, 171, 171);
+}

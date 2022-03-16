@@ -15,9 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from pomodoro import views as pomo_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('pomodoro/', pomo_views.pomodoro, name='pomodoro'),
 ]
 
 # Use include() to add paths from the catalog application

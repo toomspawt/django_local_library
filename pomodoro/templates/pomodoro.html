@@ -1,0 +1,68 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/pomodoro.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+P+One&display=swap" rel="stylesheet">
+    <title>Pomodoro</title>
+</head>
+<body class="color-focus">
+    <div class="container">
+        <div class="setting">
+            <div class="setting-icon">Pomodoro</div>
+            <div>
+                <button class="setting-button">Report</button>
+                <button class="setting-button">Setting</button>
+            </div>
+        </div>
+        <hr>
+        <div class="timer">
+            <div class="mode-button-group">
+                <button class="mode-button" style="background: none rgba(0, 0, 0, 0.15);" id="mode-focus">Pomodoro</button>
+                <button class="mode-button" id="mode-short">Short Break</button>
+                <button class="mode-button" id="mode-long">Long Break</button>
+            </div>
+            <div class="counter-time" id="countdown">
+                0:3
+            </div>
+            <div class="start-button-group">
+                <button class="counter-start color-focus" id="button-start">
+                    <span>Start</span>
+                </button>
+                <button class="counter-start color-focus" id="button-skip">
+                    <span>>></span>
+                </button>
+            </div>
+        </div>
+        <div class="task">
+            <div class="period" id="period">#1</div>
+            <div class="helper-text" id="helper-text">Time to focus!</div>
+            <div class="task-setting">
+                <div><span>Task</span></div>
+                <div><button class="task-setting-button">⫶</button></div>
+            </div>
+            <hr style="border-color: rgb(255, 255, 255, 0.5);">
+            <div class="task-card-group">
+                <div class="add-task" id="add-task-button">
+                    Add task
+                </div>
+                <form class="task-card add-task-card" id="add-task-form">
+                    <input type="text" id="task-name" name="task-name" placeholder="What are you working on?">
+                    <textarea id="task-note" name="task-note" placeholder="Some notes"></textarea>
+                    <div class="add-card-button">
+                        <button id="button-cancel">Cancel</button>
+                        <button id="button-add" disabled>Add</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+    <script src="{% static 'js/pomodoro.js' %}"></script>
+</html>
