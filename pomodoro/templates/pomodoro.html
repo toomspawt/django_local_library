@@ -43,8 +43,15 @@
             <div class="period" id="period">#1</div>
             <div class="helper-text" id="helper-text">Time to focus!</div>
             <div class="task-setting">
-                <div><span>Task</span></div>
-                <div><button class="task-setting-button">⫶</button></div>
+                <span>Task</span>
+                <div>
+                    <button class="task-setting-button" id="button-task-setting">⫶</button>
+                    <div class="task-setting-dropdown" id="task-setting-dropdown">
+                        <div class="task-setting-action" id="button-clear-completed">Clear completed tasks</div>
+                        <hr>
+                        <div class="task-setting-action" id="button-clear-all">Clear all tasks</div>
+                    </div>
+                </div>
             </div>
             <hr style="border-color: rgb(255, 255, 255, 0.5);">
             <div class="task-card-group">
@@ -63,5 +70,7 @@
         </div>
     </div>
 </body>
+    <script src="{% static 'js/TimeCounter.js' %}"></script>
+    <script src="{% static 'js/Task.js' %}"></script>
     <script src="{% static 'js/pomodoro.js' %}"></script>
 </html>
