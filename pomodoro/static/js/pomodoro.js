@@ -17,54 +17,107 @@ const addButton = document.getElementById("button-add");
 const taskNameInput = document.getElementById("task-name");
 const taskNoteInput = document.getElementById("task-note");
 
-// timeCounter class
+// global var
 
-class timeCounter {
+let taskList = {};
+
+// task class
+
+class Task {
+    constructor(taskId, taskName, taskNote) {
+        this.taskId = taskId;
+        this.taskName = taskName;
+        this.taskNote = taskNote;
+        this.completed = false;
+        this.selected = false;
+    }
+
+    renderTask = () => {
+        // Create new task card
+        /*
+            <div id="task-${id}" class="task-card">
+                <div>
+                    <span>${taskName}</span>
+                    <button class="task-setting-button">✓</button>
+                </div>
+                <div class="task-note">${taskNote}/div>
+            </div>
+        */
+
+        // div for name
+        const nameDiv = document.createElement("div");;
+        const nameDivSpan = document.createElement("span");
+        nameDivSpan.textContent = this.taskName;
+        if (this.completed) nameDivSpan.classList.add("completed-task");
+
+        const nameDivButton = document.createElement("button");
+        nameDivButton.textContent = "✓";
+        nameDivButton.className = "task-setting-button";
+        nameDivButton.addEventListener("click", () => this.completeTask());
+
+        nameDiv.appendChild(nameDivSpan);
+        nameDiv.appendChild(nameDivButton);
+
+        // div for note
+        const noteDiv = document.createElement("div");
+        noteDiv.className = "task-note";
+        noteDiv.textContent = this.taskNote;
+
+        // add to new div
+        const newDiv = document.createElement("div");
+        newDiv.id = `task-${this.taskId}`;
+        newDiv.className = "task-card";
+        if (this.selected) newDiv.classList.add("task-card-selected");
+        newDiv.appendChild(nameDiv);
+        if (this.taskNote !== "") newDiv.appendChild(noteDiv);
+            
+        newDiv.addEventListener("click", (e) => {
+            if (!e.target.classList.contains('task-setting-button'))
+                this.selectTask();
+        });
+
+        document.getElementsByClassName("task-card-group")[0].insertBefore(newDiv, addTaskButton);
+    }
+
+    static renderTaskList = () => {
+        // Displaying helper text
+        const helper_text = document.getElementById("helper-text");
+        let new_helper_text = timeCounterFocus.mode === "focus" ? "Time to focus!" : "Time for a break!"
+
+        // Clear old task cards
+        const oldTaskList = document.getElementsByClassName('task-card');
+        while (oldTaskList.length > 1) oldTaskList[0].remove();
+
+        // Render new task cards
+        for (let i in taskList) {
+            taskList[i].renderTask();
+            if (taskList[i].selected == true) new_helper_text = taskList[i].taskName;
+        }
+
+        helper_text.textContent = new_helper_text;
+    }
+
+    completeTask = () => {
+        this.completed = !this.completed;
+        Task.renderTaskList();
+    }
+
+    selectTask = () => {
+        if (!this.selected) for (let t in taskList) 
+            if (taskList[t].taskId !== this.taskId) taskList[t].selected = false;
+        this.selected = !this.selected;
+        Task.renderTaskList();
+    };
+}
+
+// TimeCounter class
+
+class TimeCounter {
     constructor(countdownInterval, numberOfTask) {
         this.countdownInterval = countdownInterval;
         this.mode = "focus";
         this.numberOfFocus = 0;
         this.numberOfTask = numberOfTask;
-        this.focusedTaskId = 0;
-    }
-
-    // Displaying helper text
-    displayHelper = (text) => {
-        const helper_text = document.getElementById("helper-text");
-        if (this.focusedTaskId !== 0) {
-            helper_text.textContent = document.getElementById(`task-${this.focusedTaskId}`).
-                                        getElementsByTagName("span")[0].textContent;
-        } else {
-            helper_text.textContent = text;
-        }
-    }
-
-    // Choosing task 
-    chooseTask = (taskId) => {
-        const taskCard = document.getElementById(taskId);
-
-        if (this.focusedTaskId !== parseInt(taskId.replace("task-", ""))) {
-            // De-select other task
-            if (this.focusedTaskId !== 0) 
-                document.getElementById(`task-${this.focusedTaskId}`).classList.remove("task-card-selected");
-
-            // Update focused task
-            this.focusedTaskId = parseInt(taskId.replace("task-", ""));
-
-            // Styling card
-            taskCard.classList.add("task-card-selected");
-
-            // Display helper
-            this.displayHelper("");
-
-        } else {
-            taskCard.classList.remove("task-card-selected");
-
-            this.focusedTaskId = 0;
-
-            const helper_text = this.mode == "focus" ? "Time to focus!" : "Time for a break!";
-            this.displayHelper(helper_text);
-        }
     }
 
     // Add new task card before "Add task" button
@@ -72,33 +125,10 @@ class timeCounter {
         // Update meta information
         this.numberOfTask++;
 
-        // Div for name
-        const nameDiv = document.createElement("div");;
-        const nameDivSpan = document.createElement("span");
-        nameDivSpan.textContent = taskName;
-        const nameDivButton = document.createElement("button");
-        nameDivButton.textContent = "⫶";
-        nameDivButton.className = "task-setting-button";
-
-        nameDiv.appendChild(nameDivSpan);
-        nameDiv.appendChild(nameDivButton);
-
-        // Div for note
-        const noteDiv = document.createElement("div");
-        noteDiv.className = "task-note";
-        noteDiv.textContent = taskNote;
-
-        // Create new task card
-        const newDiv = document.createElement("div");
-        newDiv.id = `task-${this.numberOfTask}`;
-        newDiv.className = "task-card";
-        newDiv.appendChild(nameDiv);
-        if (taskNote !== "") newDiv.appendChild(noteDiv);
-
-        newDiv.addEventListener("click", () => this.chooseTask(newDiv.id));
-
-        document.getElementsByClassName("task-card-group")[0].insertBefore(newDiv, addTaskButton);
-
+        // Render task
+        const newTask = new Task(this.numberOfTask, taskName, taskNote);
+        taskList[this.numberOfTask] = newTask;
+        Task.renderTaskList();
     }
     
     // Helper function for mode-button
@@ -124,7 +154,7 @@ class timeCounter {
         document.getElementById("button-skip").classList.value = "counter-start color-" + mode;
 
         // Change helper text
-        this.displayHelper(helper_text);
+        Task.renderTaskList();
     }
 
     timesUp = () => {
@@ -215,7 +245,13 @@ class timeCounter {
     }
 }
 
-const timeCounterFocus = new timeCounter(focusDefault, 0);
+const timeCounterFocus = new TimeCounter(focusDefault, 2);
+
+const task1 = new Task(1, "Studying", "Let's code");
+taskList[1] = task1;
+const task2 = new Task(2, "Gaming", "");
+taskList[2] = task2;
+Task.renderTaskList();
 
 /*
     Mode-changing buttons
