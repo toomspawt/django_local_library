@@ -12,12 +12,63 @@
     <title>Pomodoro</title>
 </head>
 <body class="color-focus">
+    <!-- Appear after clicking setting button -->
+    <div class="setting-card-background" id="setting-card-background">
+        <div class="setting-card">
+            <div class="setting-card-body">
+                <div class="setting-card-header">
+                    <span>Timer setting</span>
+                    <button class="task-setting-button" id="button-close">X</button>
+                </div>
+                <hr>
+                <div style="text-align: left; margin-bottom: 10px;">Time (minutes)</div>
+                <div class="setting-action">
+                    <div class="time-interval">
+                        <label>Pomodoro</label>
+                        <input id="focus-length" type="number" min="0" step="1">
+                    </div>
+                    <div class="time-interval">
+                        <label>Short Break</label>
+                        <input id="short-length" type="number" min="0" step="1">
+                    </div>
+                    <div class="time-interval">
+                        <label>Long Break</label>
+                        <input id="long-length" type="number" min="0" step="1">
+                    </div>
+                </div>
+                <hr>
+                <div class="setting-action">
+                    <span>Auto start Breaks?</span>
+                    <label class="auto-start-switch">
+                        <input id="auto-start-break" type="checkbox">
+                        <span class="slider-round"></span>
+                      </label>
+                </div>
+                <hr>
+                <div class="setting-action">
+                    <span>Auto start Pomodoros?</span>
+                    <label class="auto-start-switch">
+                        <input id="auto-start-focus" type="checkbox">
+                        <span class="slider-round"></span>
+                    </label>
+                </div>
+                <hr>
+                <div class="setting-action">
+                    <span>Long Break interval</span>
+                    <input id="long-break-interval" type="number" min="1" step="1" width="70">
+                </div>
+            </div>
+            <div class="setting-card-footer">
+                <button id="button-setting-ok">OK</button>
+            </div>
+        </div>
+    </div>
     <div class="container">
         <div class="setting">
             <div class="setting-icon">Pomodoro</div>
             <div>
-                <button class="setting-button">Report</button>
-                <button class="setting-button">Setting</button>
+                <button class="setting-button" style="display: none;">Report</button>
+                <button class="setting-button" id="button-setting">Setting</button>
             </div>
         </div>
         <hr>
@@ -27,9 +78,7 @@
                 <button class="mode-button" id="mode-short">Short Break</button>
                 <button class="mode-button" id="mode-long">Long Break</button>
             </div>
-            <div class="counter-time" id="countdown">
-                0:3
-            </div>
+            <div class="counter-time" id="countdown"></div>
             <div class="start-button-group">
                 <button class="counter-start color-focus" id="button-start">
                     <span>Start</span>

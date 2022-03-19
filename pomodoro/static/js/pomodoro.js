@@ -1,9 +1,14 @@
 // Setting default period
-const focusDefault = 3*1000;
-const shortDefault = 5*1000;
-const longDefault = 10*1000;
+const focusDefault = 1*60*1000;
+const shortDefault = 2*60*1000;
+const longDefault = 3*60*1000;
 
 // Button and input
+
+const settingButton = document.getElementById("button-setting");
+const settingCard = document.getElementById("setting-card-background");
+const closeButton = document.getElementById("button-close");
+const okButton = document.getElementById("button-setting-ok");
 
 const focusButton = document.getElementById("mode-focus");
 const shortButton = document.getElementById("mode-short");
@@ -22,7 +27,7 @@ const addButton = document.getElementById("button-add");
 const taskNameInput = document.getElementById("task-name");
 const taskNoteInput = document.getElementById("task-note");
 
-const timeCounterFocus = new TimeCounter(focusDefault, 2);
+const timeCounterFocus = new TimeCounter(focusDefault, 2, focusDefault, shortDefault, longDefault);
 
 const task1 = new Task(1, "Studying", "Let's code");
 taskList[1] = task1;
@@ -31,17 +36,53 @@ taskList[2] = task2;
 Task.renderTaskList();
 
 /*
+    Setting
+*/
+
+settingButton.addEventListener("click", () => { 
+
+    document.getElementById("focus-length").value = timeCounterFocus.focusTime/60/1000;
+    document.getElementById("short-length").value = timeCounterFocus.shortTime/60/1000;
+    document.getElementById("long-length").value = timeCounterFocus.longTime/60/1000;
+    document.getElementById("auto-start-break").checked = timeCounterFocus.autoBreak;
+    document.getElementById("auto-start-focus").checked = timeCounterFocus.autoFocus;
+    document.getElementById("long-break-interval").value = timeCounterFocus.longBreakInterval;
+
+    settingCard.style.display = "block"; 
+});
+
+closeButton.addEventListener("click", () => { settingCard.style.display = "none"; });
+settingCard.addEventListener("click", (e) => {
+    if (e.target === document.getElementById("setting-card-background")) settingCard.style.display = "none";
+});
+
+okButton.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    const focusTime = document.getElementById("focus-length").value*60*1000;
+    const shortTime = document.getElementById("short-length").value*60*1000;
+    const longTime = document.getElementById("long-length").value*60*1000;
+    const autoBreak = document.getElementById("auto-start-break").checked;
+    const autoFocus = document.getElementById("auto-start-focus").checked;
+    const longBreakInterval = document.getElementById("long-break-interval").value*1;
+
+    timeCounterFocus.update(focusTime, shortTime, longTime, autoBreak, autoFocus, longBreakInterval);
+
+    settingCard.style.display = "none";
+});
+
+/*
     Mode-changing buttons
 */
 
 // Selecting the buttons 
 
 focusButton.addEventListener("click", focusMode = () => 
-                            timeCounterFocus.changeMode(focusButton, "focus", "0:3", focusDefault));
+                            timeCounterFocus.changeMode(focusButton, "focus", timeCounterFocus.focusTime));
 shortButton.addEventListener("click", shortMode = () => 
-                            timeCounterFocus.changeMode(shortButton, "short", "0:5", shortDefault));
+                            timeCounterFocus.changeMode(shortButton, "short", timeCounterFocus.shortTime));
 longButton.addEventListener("click", longMode = () => 
-                            timeCounterFocus.changeMode(longButton, "long", "0:10", longDefault));
+                            timeCounterFocus.changeMode(longButton, "long", timeCounterFocus.longTime));
 
 /*
     Start button

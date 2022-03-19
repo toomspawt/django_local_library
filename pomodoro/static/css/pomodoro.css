@@ -4,8 +4,7 @@
 
 body {
     margin: 0;
-    transition: color 0.5s ease-in-out 0s;
-    transition: background-color 0.5s ease-in-out 0s;
+    transition: all 0.5s ease-in-out 0s;
 }
 
 hr {
@@ -27,6 +26,174 @@ hr {
 .color-long {
     background-color: rgb(69, 124, 163);
     color: rgb(69, 124, 163);
+}
+
+.setting-card-background {
+    display: none;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.4);
+    width: 100%;
+    height: 100vh;
+    justify-content: center;
+    padding: 100px 0px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.setting-card {
+    background-color: white;
+    color: rgb(34, 34, 34);
+    border-radius: 8px;
+    max-width: min(95vw, 400px);
+    margin: auto;
+    box-sizing: border-box;
+}
+
+.setting-card-body {
+    padding: 20px;
+}
+
+.setting-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: rgb(187, 187, 187);
+    margin: auto;
+    font-size: 20px;
+}
+
+.setting-card-header button {
+    color: rgb(187, 187, 187);
+}
+
+.setting-card-header button:hover {
+    color: rgba(102, 102, 102, 0.8);
+    transform: none;
+}
+
+.setting-card hr {
+    margin: 20px 0px;
+}
+
+.setting-action {
+    display: flex;
+    justify-content: space-between;
+}
+
+.setting-action input[type="number"] {
+    width: 100%;
+    border-radius: 4px;
+    border: none;
+    background-color: rgb(239, 239, 239);
+    color: rgb(85, 85, 85);
+    padding: 10px;
+    box-sizing: border-box;
+    margin-top: 5px;
+}
+
+.setting-action > span {
+    margin: auto 0px;
+}
+
+.time-interval {
+    color: rgb(187, 187, 187);
+    font-size: 0.8rem;
+    text-align: left;
+    max-width: 98px;
+}
+
+/* The switch - the box around the slider */
+.auto-start-switch {
+    width: 72px;
+    height: 36px;
+    position: relative;
+    display: inline-block;
+}
+
+/* Hide default HTML checkbox */
+.auto-start-switch > input[type="checkbox"] {
+    height: 0;
+    width: 0;
+}
+
+/* The slider */
+.slider-round {
+    background-color: rgb(204, 204, 204);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 18px;
+    transition: 0.4s;
+}
+
+.slider-round::before {
+    content: "";
+    width: 34px;
+    height: 34px;
+    position: absolute;
+    left: 1px;
+    bottom: 1px;
+    background-color: white;
+    border: none;
+    border-radius: 50px;
+    transition: 0.4s;
+}
+
+.auto-start-switch > input:checked + .slider-round {
+    background-color: rgb(33, 150, 243);
+}
+
+.auto-start-switch > input:checked + .slider-round::before {
+    transform: translateX(36px);
+}
+
+.auto-start-background {
+    width: 72px;
+    height: 36px;
+    background-color: rgb(187, 187, 187);
+    border: none;
+    border-radius: 50px;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    transition: all 0.5s ease-in-out 0s;
+    cursor: pointer;
+}
+
+#long-break-interval {
+    max-width: 98px;
+}
+
+.setting-card-footer {
+    background-color: rgb(128, 128, 128, 0.1);
+    margin: 0px;
+    padding: 15px;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: right;
+}
+
+.setting-card-footer > button {
+    box-shadow: rgb(0 0 0 / 20%) 0px 2px 2px;
+    color: white;
+    opacity: 0.9;
+    padding: 8px 25px;
+    background-color: rgb(34, 34, 34);
+    border: none;
+    border-radius: 4px;
+}
+
+.setting-card-footer > button:hover {
+    opacity: 1;
 }
 
 .container {
@@ -127,8 +294,7 @@ hr {
     border-radius: 4px;
     margin-top: 20px;
     padding: 0;
-    transition: color 0.5s ease-in-out 0s;
-    transition: background-color 0.5s ease-in-out 0s;
+    transition: all 0.5s ease-in-out 0s;
 }
 
 .counter-start span {
